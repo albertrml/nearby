@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.rocketseat.nlw.nearby"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.rocketseat.nlw.nearby"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
