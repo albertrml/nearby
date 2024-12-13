@@ -55,6 +55,17 @@ fun NearbyButton(
     }
 }
 
+fun contentPaddingButton(
+    text: String?,
+    iconRes: Int?
+): PaddingValues = if ( text == null && iconRes != null )
+{
+    PaddingValues(0.dp)
+} else {
+    ButtonDefaults.ContentPadding
+}
+
+
 @Preview
 @Composable
 private fun NearbyButtonNoTextPreview() {
@@ -81,14 +92,4 @@ private fun NearbyButtonNoIconPreview() {
         modifier = Modifier.fillMaxWidth(),
         text = "Confirmar",
     ) {}
-}
-
-fun contentPaddingButton(
-    text: String?,
-    iconRes: Int?
-): PaddingValues = if ( text == null && iconRes != null )
-{
-    PaddingValues(8.dp)
-} else {
-    ButtonDefaults.ContentPadding
 }

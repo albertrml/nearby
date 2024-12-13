@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rocketseat.nlw.nearby.R
+import com.rocketseat.nlw.nearby.data.model.mock.mockCoupons
 import com.rocketseat.nlw.nearby.ui.theme.Gray400
 import com.rocketseat.nlw.nearby.ui.theme.GreenBase
 import com.rocketseat.nlw.nearby.ui.theme.GreenExtraLight
@@ -30,7 +31,7 @@ fun NearbyMarketDetailsCoupons(
     coupons: List<String>
 ) {
     Column(
-        modifier= modifier,
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
@@ -39,10 +40,10 @@ fun NearbyMarketDetailsCoupons(
             color = Gray400
         )
         coupons.forEach { coupon ->
-            Row (
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(40.dp)
+                    .height(48.dp)
                     .clip(RoundedCornerShape(8.dp))
                     .background(GreenExtraLight)
                     .padding(8.dp),
@@ -58,7 +59,6 @@ fun NearbyMarketDetailsCoupons(
                 Text(
                     text = coupon,
                     style = Typography.headlineSmall,
-                    color = Gray400
                 )
             }
         }
@@ -76,6 +76,6 @@ fun titleCoupons(quantity: Int): String = when (quantity) {
 private fun NearbyMarketDetailsCouponsPreview() {
     NearbyMarketDetailsCoupons(
         modifier = Modifier.fillMaxWidth(),
-        coupons = listOf("FM4345T5", "FM4345T6")
+        coupons = mockCoupons
     )
 }
