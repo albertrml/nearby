@@ -19,7 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rocketseat.nlw.nearby.R
-import com.rocketseat.nlw.nearby.data.model.mock.mockCoupons
+import com.rocketseat.nlw.nearby.data.mock.mockCoupons
 import com.rocketseat.nlw.nearby.ui.theme.Gray400
 import com.rocketseat.nlw.nearby.ui.theme.GreenBase
 import com.rocketseat.nlw.nearby.ui.theme.GreenExtraLight

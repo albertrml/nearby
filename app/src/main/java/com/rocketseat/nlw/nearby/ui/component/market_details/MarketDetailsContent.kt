@@ -14,14 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rocketseat.nlw.nearby.data.model.Market
-import com.rocketseat.nlw.nearby.data.model.mock.mockCoupons
-import com.rocketseat.nlw.nearby.data.model.mock.mockMarkets
+import com.rocketseat.nlw.nearby.data.mock.mockCoupons
+import com.rocketseat.nlw.nearby.data.mock.mockMarkets
+import com.rocketseat.nlw.nearby.data.model.MarketRule
 import com.rocketseat.nlw.nearby.ui.theme.Typography
 
 @Composable
 fun MarketDetailsContent(
     modifier: Modifier = Modifier,
-    market: Market
+    market: Market,
+    rules: List<MarketRule>? = emptyList(),
+    coupons: List<String>? = emptyList()
 ) {
     Column {
         Text(
@@ -44,15 +47,17 @@ fun MarketDetailsContent(
                     .fillMaxWidth()
                     .padding(vertical = 24.dp)
             )
-/*            if (market.rules.isNotEmpty()) {
-                NearbyMarketDetailsRules(rules = market.rules)
+            if (!rules.isNullOrEmpty()) {
+                NearbyMarketDetailsRules(rules = rules)
                 HorizontalDivider(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 24.dp)
                 )
-            }*/
-            NearbyMarketDetailsCoupons(coupons = mockCoupons)
+            }
+            if (!coupons.isNullOrEmpty()) {
+                NearbyMarketDetailsCoupons(coupons = coupons)
+            }
         }
     }
 }

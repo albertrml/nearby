@@ -1,5 +1,6 @@
 package com.rocketseat.nlw.nearby.data.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,5 +14,6 @@ data class Market(
     val longitude: Double,
     val address: String,
     val phone: String,
+    @SerialName ("cover")
     val coverUrl: String,
 )

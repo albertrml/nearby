@@ -1,4 +1,4 @@
-package com.rocketseat.nlw.nearby.data.model.mock
+package com.rocketseat.nlw.nearby.data.mock
 
 import com.rocketseat.nlw.nearby.data.model.Market
 

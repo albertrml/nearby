@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rocketseat.nlw.nearby.data.model.MarketRule
-import com.rocketseat.nlw.nearby.data.model.mock.mockRules
+import com.rocketseat.nlw.nearby.data.mock.mockRules
 import com.rocketseat.nlw.nearby.ui.theme.Gray400
 import com.rocketseat.nlw.nearby.ui.theme.Gray500
 import com.rocketseat.nlw.nearby.ui.theme.Typography

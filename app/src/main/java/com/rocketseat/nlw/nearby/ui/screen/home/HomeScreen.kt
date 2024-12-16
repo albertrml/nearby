@@ -1,4 +1,4 @@
-package com.rocketseat.nlw.nearby.ui.screen
+package com.rocketseat.nlw.nearby.ui.screen.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,73 +9,84 @@ import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.maps.android.compose.GoogleMap
 import com.rocketseat.nlw.nearby.data.model.Market
-import com.rocketseat.nlw.nearby.data.model.mock.mockCategories
-import com.rocketseat.nlw.nearby.data.model.mock.mockMarkets
 import com.rocketseat.nlw.nearby.ui.component.category.NearbyCategoryFilterChipList
 import com.rocketseat.nlw.nearby.ui.component.market.NearbyMarketCardList
 import com.rocketseat.nlw.nearby.ui.theme.Gray100
+import com.rocketseat.nlw.nearby.ui.utils.NearbyGoogleMap
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    uiState: HomeUiState,
+    onEvent: (HomeUiEvent) -> Unit,
     onNavigateTo: (Market) -> Unit
 ) {
     val bottomSheetState = rememberBottomSheetScaffoldState()
-    val isBottomSheetVisible by remember { mutableStateOf(true) }
-
     val configuration = LocalConfiguration.current
-    if (isBottomSheetVisible) {
-        BottomSheetScaffold(
-            scaffoldState = bottomSheetState,
-            sheetContainerColor = Gray100,
-            sheetPeekHeight = configuration.screenHeightDp.dp * 0.5f,
-            sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-            sheetContent = {
+
+    LaunchedEffect(true) {
+        onEvent(HomeUiEvent.OnFetchCategories)
+    }
+
+    BottomSheetScaffold(
+        scaffoldState = bottomSheetState,
+        sheetContainerColor = Gray100,
+        sheetPeekHeight = configuration.screenHeightDp.dp * 0.5f,
+        sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+        sheetContent = {
+            if (!uiState.markets.isNullOrEmpty()) {
                 NearbyMarketCardList(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(top = 16.dp),
-                    markets = mockMarkets,
+                    markets = uiState.markets,
                     onMarketClick = { selectedMarket ->
                         onNavigateTo(selectedMarket)
                     }
                 )
-            },
-            content = {
-                Box(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(it)
-                ) {
-                    GoogleMap(modifier = Modifier.fillMaxSize())
+            }
+        },
+        content = {
+            Box(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(
+                        bottom = it
+                            .calculateBottomPadding()
+                            .minus(8.dp)
+                    )
+            ) {
+
+                NearbyGoogleMap(uiState = uiState)
+
+                if (!uiState.categories.isNullOrEmpty()) {
                     NearbyCategoryFilterChipList(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(24.dp)
                             .align(Alignment.TopStart),
-                        categories = mockCategories,
-                        onSelectedCategoryChange = {}
+                        categories = uiState.categories,
+                        onSelectedCategoryChange = { selectedCategory ->
+                            onEvent(HomeUiEvent.OnFetchMarkets(selectedCategory.id))
+                        }
                     )
                 }
             }
-        )
-    }
+        }
+    )
 }
 
 
-/*
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
-}*/
+    HomeScreen(onNavigateTo = {}, uiState = HomeUiState(), onEvent = {})
+}

@@ -8,7 +8,7 @@ data class MarketDetails(
     val categoryId: String,
     val name: String,
     val description: String,
-    val rules: List<Rule>,
+    val rules: List<MarketRule>,
     val coupons: Int,
     val latitude: Double,
     val longitude: Double,
