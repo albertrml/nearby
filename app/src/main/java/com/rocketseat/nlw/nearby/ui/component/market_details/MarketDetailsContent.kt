@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rocketseat.nlw.nearby.data.model.Market
-import com.rocketseat.nlw.nearby.data.mock.mockCoupons
 import com.rocketseat.nlw.nearby.data.mock.mockMarkets
 import com.rocketseat.nlw.nearby.data.model.MarketRule
 import com.rocketseat.nlw.nearby.ui.theme.Typography
